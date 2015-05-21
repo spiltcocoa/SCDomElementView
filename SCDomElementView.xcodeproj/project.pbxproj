@@ -10,6 +10,7 @@
 		42D198191B0E7FA200CA1B9B /* SCDomElementView.h in Headers */ = {isa = PBXBuildFile; fileRef = 42D198181B0E7FA200CA1B9B /* SCDomElementView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		42D1981F1B0E7FA200CA1B9B /* SCDomElementView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42D198131B0E7FA200CA1B9B /* SCDomElementView.framework */; };
 		42D198261B0E7FA200CA1B9B /* SCDomElementViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D198251B0E7FA200CA1B9B /* SCDomElementViewTests.swift */; };
+		42D198301B0E7FEA00CA1B9B /* SCDomElementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D1982F1B0E7FEA00CA1B9B /* SCDomElementView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,6 +30,7 @@
 		42D1981E1B0E7FA200CA1B9B /* SCDomElementViewTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SCDomElementViewTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		42D198241B0E7FA200CA1B9B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		42D198251B0E7FA200CA1B9B /* SCDomElementViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCDomElementViewTests.swift; sourceTree = "<group>"; };
+		42D1982F1B0E7FEA00CA1B9B /* SCDomElementView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SCDomElementView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +75,7 @@
 			children = (
 				42D198181B0E7FA200CA1B9B /* SCDomElementView.h */,
 				42D198161B0E7FA200CA1B9B /* Supporting Files */,
+				42D1982F1B0E7FEA00CA1B9B /* SCDomElementView.swift */,
 			);
 			path = SCDomElementView;
 			sourceTree = "<group>";
@@ -209,6 +212,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				42D198301B0E7FEA00CA1B9B /* SCDomElementView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -323,27 +327,32 @@
 		42D1982A1B0E7FA200CA1B9B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = SCDomElementView/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
 		42D1982B1B0E7FA200CA1B9B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = SCDomElementView/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
