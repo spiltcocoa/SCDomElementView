@@ -73,9 +73,9 @@
 		42D198151B0E7FA200CA1B9B /* SCDomElementView */ = {
 			isa = PBXGroup;
 			children = (
+				42D1982F1B0E7FEA00CA1B9B /* SCDomElementView.swift */,
 				42D198181B0E7FA200CA1B9B /* SCDomElementView.h */,
 				42D198161B0E7FA200CA1B9B /* Supporting Files */,
-				42D1982F1B0E7FEA00CA1B9B /* SCDomElementView.swift */,
 			);
 			path = SCDomElementView;
 			sourceTree = "<group>";
@@ -408,6 +408,7 @@
 				42D1982B1B0E7FA200CA1B9B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		42D1982C1B0E7FA200CA1B9B /* Build configuration list for PBXNativeTarget "SCDomElementViewTests" */ = {
 			isa = XCConfigurationList;
@@ -416,6 +417,7 @@
 				42D1982E1B0E7FA200CA1B9B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
