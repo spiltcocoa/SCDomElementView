@@ -9,6 +9,12 @@
 import UIKit
 import WebKit
 
+public protocol SCDomElementViewDelegate {
+	func domElementViewDidStartRequest(view: SCDomElementView)
+	func domElementViewDidFinishRequest(view: SCDomElementView)
+	func domElementView(view: SCDomElementView, DidFinishRequestWithError: NSError)
+}
+
 public class SCDomElementView: UIView, WKNavigationDelegate, UIScrollViewDelegate {
 
 	public let webView: WKWebView = {
@@ -27,6 +33,8 @@ public class SCDomElementView: UIView, WKNavigationDelegate, UIScrollViewDelegat
 		return webView
 	}()
 
+	public var delegate: SCDomElementViewDelegate?
+
 	public override init(frame: CGRect) {
 		super.init(frame: frame)
 
@@ -40,20 +48,22 @@ public class SCDomElementView: UIView, WKNavigationDelegate, UIScrollViewDelegat
 	}
 
 	private func configure() {
-		backgroundColor = UIColor.redColor()
 		webView.navigationDelegate = self
 		webView.scrollView.delegate = self
 		webView.scrollView.bounces = false
 
 		addSubview(webView)
-//		scrollView.addSubview(webView)
 	}
 
 	private func rectFromId(id: String, callback: (CGRect) -> ()) {
 		var javascript = "function f(){ var r = document.getElementById('\(id)').getBoundingClientRect(); return '{{'+r.left+','+r.top+'},{'+r.width+','+r.height+'}}'; } f();";
 
 		webView.evaluateJavaScript(javascript) { result, error in
-			if error != nil { return }
+			if let error = error {
+				self.delegate?.domElementView(self, DidFinishRequestWithError: error)
+
+				return
+			}
 
 			if let result = result as? String {
 				let rect = CGRectFromString(result)
@@ -64,9 +74,7 @@ public class SCDomElementView: UIView, WKNavigationDelegate, UIScrollViewDelegat
 	}
 
 	public func loadRequest(request: NSURLRequest) {
-		println("wat")
-		println(request)
-		println(webView)
+		delegate?.domElementViewDidStartRequest(self)
 		webView.loadRequest(request)
 	}
 
@@ -76,7 +84,10 @@ public class SCDomElementView: UIView, WKNavigationDelegate, UIScrollViewDelegat
 			self.webView.scrollView.contentInset = UIEdgeInsets(top: -frame.origin.y, left: -frame.origin.x, bottom: (frame.origin.y + frame.size.height), right: (frame.origin.x + frame.size.width))
 
 			frame.origin = CGPointZero
+			self.frame = frame
 			self.webView.frame = frame
+
+			self.delegate?.domElementViewDidFinishRequest(self)
 		}
 	}
 }
