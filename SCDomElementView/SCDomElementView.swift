@@ -9,11 +9,9 @@
 import UIKit
 import WebKit
 
-public class SCDomElementView: UIView, WKNavigationDelegate {
+public class SCDomElementView: UIView, WKNavigationDelegate, UIScrollViewDelegate {
 
-	public let scrollView = UIScrollView()
-
-	private(set) lazy var webView: WKWebView = {
+	public let webView: WKWebView = {
 		let js = "var meta = document.createElement('meta'); meta.setAttribute('name', 'viewport'); meta.setAttribute('content', 'initial-scale=1.0'); document.getElementsByTagName('head')[0].appendChild(meta);"
 		let script = WKUserScript(source: js, injectionTime: .AtDocumentEnd, forMainFrameOnly: true)
 
@@ -23,11 +21,15 @@ public class SCDomElementView: UIView, WKNavigationDelegate {
 		let config = WKWebViewConfiguration()
 		config.userContentController = controller
 
-		return WKWebView(frame: self.frame, configuration: config)
-		}()
+		let webView = WKWebView(frame: CGRectZero, configuration: config)
+		webView.userInteractionEnabled = false
+
+		return webView
+	}()
 
 	public override init(frame: CGRect) {
 		super.init(frame: frame)
+
 		configure()
 	}
 
@@ -40,7 +42,8 @@ public class SCDomElementView: UIView, WKNavigationDelegate {
 	private func configure() {
 		backgroundColor = UIColor.redColor()
 		webView.navigationDelegate = self
-//		webView.userInteractionEnabled = false
+		webView.scrollView.delegate = self
+		webView.scrollView.bounces = false
 
 		addSubview(webView)
 //		scrollView.addSubview(webView)
@@ -61,15 +64,17 @@ public class SCDomElementView: UIView, WKNavigationDelegate {
 	}
 
 	public func loadRequest(request: NSURLRequest) {
+		println("wat")
+		println(request)
+		println(webView)
 		webView.loadRequest(request)
 	}
 
 	public func webView(webView: WKWebView, didFinishNavigation navigation: WKNavigation!) {
 		self.rectFromId("mobile") { rect in
 			var frame = rect
-			println(frame.origin)
-			self.webView.scrollView.setContentOffset(frame.origin, animated: false)
-			println(self.webView.scrollView.contentOffset)
+			self.webView.scrollView.contentInset = UIEdgeInsets(top: -frame.origin.y, left: -frame.origin.x, bottom: (frame.origin.y + frame.size.height), right: (frame.origin.x + frame.size.width))
+
 			frame.origin = CGPointZero
 			self.webView.frame = frame
 		}

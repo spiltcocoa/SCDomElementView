@@ -18,12 +18,12 @@ class ViewController: UIViewController {
 		let url = "http://192.168.1.2:3000/snapshots/80611367-d48e-4136-b82c-95e6957b5703"
 		//f59274fb-55b7-45ad-853d-7e69aac3331e" //
 		if let nsUrl = NSURL(string: url) {
+			println("omg")
 			let request = NSMutableURLRequest(URL: nsUrl, cachePolicy: .ReturnCacheDataElseLoad, timeoutInterval: 30)
 			request.setValue("f28f3d351d03e881478ef0f3aae47113", forHTTPHeaderField: "OPAL-AUTH-TOKEN")
 
 			elementView.loadRequest(request)
 		}
-		// Do any additional setup after loading the view, typically from a nib.
 	}
 
 	override func didReceiveMemoryWarning() {
