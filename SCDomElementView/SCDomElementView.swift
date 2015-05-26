@@ -12,7 +12,7 @@ import WebKit
 public protocol SCDomElementViewDelegate {
 	func domElementViewDidStartRequest(view: SCDomElementView)
 	func domElementViewDidFinishRequest(view: SCDomElementView)
-	func domElementView(view: SCDomElementView, DidFinishRequestWithError: NSError)
+	func domElementView(view: SCDomElementView, DidFinishRequestWithError error: NSError)
 }
 
 public class SCDomElementView: UIView, WKNavigationDelegate, UIScrollViewDelegate {
