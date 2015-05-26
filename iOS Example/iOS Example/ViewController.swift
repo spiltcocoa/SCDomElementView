@@ -22,7 +22,7 @@ class ViewController: UIViewController {
 			let request = NSMutableURLRequest(URL: nsUrl, cachePolicy: .ReturnCacheDataElseLoad, timeoutInterval: 30)
 			request.setValue("f28f3d351d03e881478ef0f3aae47113", forHTTPHeaderField: "OPAL-AUTH-TOKEN")
 
-			elementView.loadRequest(request)
+			elementView.showSelector("mobile", withRequest: request)
 		}
 	}
 

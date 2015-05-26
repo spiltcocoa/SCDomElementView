@@ -34,6 +34,7 @@ public class SCDomElementView: UIView, WKNavigationDelegate, UIScrollViewDelegat
 	}()
 
 	public var delegate: SCDomElementViewDelegate?
+	private var selector: String?
 
 	public override init(frame: CGRect) {
 		super.init(frame: frame)
@@ -73,21 +74,24 @@ public class SCDomElementView: UIView, WKNavigationDelegate, UIScrollViewDelegat
 		}
 	}
 
-	public func loadRequest(request: NSURLRequest) {
+	public func showSelector(selector: String, withRequest request: NSURLRequest) {
+		self.selector = selector
 		delegate?.domElementViewDidStartRequest(self)
 		webView.loadRequest(request)
 	}
 
 	public func webView(webView: WKWebView, didFinishNavigation navigation: WKNavigation!) {
-		self.rectFromId("mobile") { rect in
-			var frame = rect
-			self.webView.scrollView.contentInset = UIEdgeInsets(top: -frame.origin.y, left: -frame.origin.x, bottom: (frame.origin.y + frame.size.height), right: (frame.origin.x + frame.size.width))
+		if let selector = selector {
+			self.rectFromId(selector) { rect in
+				var frame = rect
+				self.webView.scrollView.contentInset = UIEdgeInsets(top: -frame.origin.y, left: -frame.origin.x, bottom: (frame.origin.y + frame.size.height), right: (frame.origin.x + frame.size.width))
 
-			frame.origin = CGPointZero
-			self.frame = frame
-			self.webView.frame = frame
+				frame.origin = CGPointZero
+				self.frame = frame
+				self.webView.frame = frame
 
-			self.delegate?.domElementViewDidFinishRequest(self)
+				self.delegate?.domElementViewDidFinishRequest(self)
+			}
 		}
 	}
 }
