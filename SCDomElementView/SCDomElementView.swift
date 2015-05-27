@@ -9,13 +9,13 @@
 import UIKit
 
 public enum SCDomElementLifecycleEvent {
-	case Start
-	case Finish
-	case Failure
+	case StartLoading
+	case FinishLoading
+	case FailLoading
 }
 
 public protocol SCDomElementViewDelegate: class {
-	func didCompleteLifecycleEvent(event: SCDomElementLifecycleEvent)
+	func domElementView(view: SCDomElementView, didLifecycleEvent event: SCDomElementLifecycleEvent)
 }
 
 public class SCDomElementView: UIView, UIWebViewDelegate {
@@ -51,14 +51,14 @@ public class SCDomElementView: UIView, UIWebViewDelegate {
 
 			callback(rect)
 		} else {
-			delegate?.didCompleteLifecycleEvent(.Failure)
+			delegate?.domElementView(self, didLifecycleEvent: .FailLoading)
 		}
 
 	}
 
 	public func showSelector(selector: String, withRequest request: NSURLRequest) {
 		self.selector = selector
-		delegate?.didCompleteLifecycleEvent(.Start)
+		delegate?.domElementView(self, didLifecycleEvent: .StartLoading)
 		webView.loadRequest(request)
 	}
 
@@ -72,7 +72,7 @@ public class SCDomElementView: UIView, UIWebViewDelegate {
 				self.frame = frame
 				self.webView.frame = frame
 
-				self.delegate?.didCompleteLifecycleEvent(.Finished)
+				self.delegate?.domElementView(self, didLifecycleEvent: .FinishLoading)
 			}
 		}
 	}
