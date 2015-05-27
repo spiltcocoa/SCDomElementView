@@ -8,7 +8,7 @@
 
 import UIKit
 
-public protocol SCDomElementViewDelegate {
+public protocol SCDomElementViewDelegate: class {
 	func domElementViewDidStartRequest(view: SCDomElementView)
 	func domElementViewDidFinishRequest(view: SCDomElementView)
 	func domElementViewRequestDidFail(view: SCDomElementView)
@@ -17,7 +17,7 @@ public protocol SCDomElementViewDelegate {
 public class SCDomElementView: UIView, UIWebViewDelegate {
 
 	public let webView = UIWebView()
-	public var delegate: SCDomElementViewDelegate?
+	public weak var delegate: SCDomElementViewDelegate?
 	private var selector: String?
 
 	public override init(frame: CGRect) {
